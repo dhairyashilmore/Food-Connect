@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FoodConnect - Share Food, Fight Hunger</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <div class="logo-icon">
+                    <i class="fas fa-utensils"></i>
+                </div>
+                <span>FoodConnect</span>
+            </div>
+            <!-- Navigation -->
+            <div class="nav-menu">
+                <a href="#" class="nav-link active" onclick="showSection('home', event)">
+                    <i class="fas fa-home"></i> Home
+                </a>
+                <a href="#" class="nav-link" onclick="showSection('post-food', event)">
+                    <i class="fas fa-plus-circle"></i> Post Food
+                </a>
+                <a href="#" class="nav-link" onclick="showSection('listings', event)">
+                    <i class="fas fa-search"></i> Find Food
+                </a>
+                <a href="#" class="nav-link" onclick="showSection('ngos', event)">
+                    <i class="fas fa-hands-helping"></i> NGOs
+                </a>
+            </div>
+            <div class="nav-actions">
+                <button class="btn btn-outline" onclick="showSection('post-food')">
+                    <i class="fas fa-share"></i> Donate Food
+                </button>
+            </div>
+            <div class="nav-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home Section -->
+    <section id="home" class="section active">
+        <div class="hero">
+            <div class="hero-background">
+                <div class="hero-pattern"></div>
+            </div>
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <i class="fas fa-leaf"></i> Supporting UN SDG 2: Zero Hunger
+                </div>
+                <h1 class="hero-title">
+                    <span class="gradient-text">Share Food,</span>
+                    <br>Fight Hunger
+                </h1>
+                <p class="hero-subtitle">Connect surplus food with people in need. Reduce waste. Save lives. Join the movement against hunger.</p>
+                
+                <div class="hero-stats">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-utensils"></i>
+                        </div>
+                        <div class="stat-content">
+                            <span class="stat-number" id="totalMeals">0</span>
+                            <span class="stat-label">Meals Shared</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-hands-helping"></i>
+                        </div>
+                        <div class="stat-content">
+                            <span class="stat-number" id="totalNGOs">0</span>
+                            <span class="stat-label">NGOs Connected</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-content">
+                            <span class="stat-number" id="totalDonors">0</span>
+                            <span class="stat-label">Active Donors</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-weight-hanging"></i>
+                        </div>
+                        <div class="stat-content">
+                            <span class="stat-number" id="totalWeight">0</span>
+                            <span class="stat-label">Kgs Saved</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hero-buttons">
+                    <button class="btn btn-primary btn-large" onclick="showSection('post-food')">
+                        <i class="fas fa-plus"></i> Post Available Food
+                    </button>
+                    <button class="btn btn-secondary btn-large" onclick="showSection('listings')">
+                        <i class="fas fa-search"></i> Find Food Nearby
+                    </button>
+                </div>
+
+                <div class="hero-features">
+                    <div class="feature">
+                        <i class="fas fa-bolt"></i>
+                        <span>Instant Matching</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Verified NGOs</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-globe"></i>
+                        <span>Global Impact</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Post Food Section -->
+    <section id="post-food" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Share Your Surplus Food</h2>
+                <p>Help reduce food waste and feed those in need</p>
+            </div>
+            <div class="form-container">
+                <form id="foodForm" class="food-form" onsubmit="submitFoodForm(event)">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="foodTitle">
+                                <i class="fas fa-heading"></i> Food Title *
+                            </label>
+                            <input type="text" id="foodTitle" required placeholder="e.g., Fresh Pizza, Vegetable Platter">
+                        </div>
+                        
+                        <div class="form-group full-width">
+                            <label for="foodDescription">
+                                <i class="fas fa-align-left"></i> Description *
+                            </label>
+                            <textarea id="foodDescription" required placeholder="Describe the food items, ingredients, packaging, and any special instructions..."></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="foodQuantity">
+                                <i class="fas fa-balance-scale"></i> Quantity *
+                            </label>
+                            <div class="input-with-select">
+                                <input type="number" id="foodQuantity" required placeholder="e.g., 10" min="1">
+                                <select id="quantityUnit">
+                                    <option value="servings">Servings</option>
+                                    <option value="plates">Plates</option>
+                                    <option value="kg">Kilograms</option>
+                                    <option value="boxes">Boxes</option>
+                                    <option value="packets">Packets</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="expiryTime">
+                                <i class="fas fa-clock"></i> Expiry Time *
+                            </label>
+                            <input type="datetime-local" id="expiryTime" required>
+                        </div>
+                        
+                        <div class="form-group full-width">
+                            <label for="location">
+                                <i class="fas fa-map-marker-alt"></i> Pickup Location *
+                            </label>
+                            <input type="text" id="location" required placeholder="Enter full address for pickup">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="donorName">
+                                <i class="fas fa-user"></i> Your Name *
+                            </label>
+                            <input type="text" id="donorName" required placeholder="Enter your full name">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="donorPhone">
+                                <i class="fas fa-phone"></i> Phone *
+                            </label>
+                            <input type="tel" id="donorPhone" required placeholder="+1 (555) 123-4567">
+                        </div>
+                        
+                        <div class="form-group full-width">
+                            <label for="donorEmail">
+                                <i class="fas fa-envelope"></i> Email
+                            </label>
+                            <input type="email" id="donorEmail" placeholder="your.email@example.com">
+                        </div>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary btn-full btn-large">
+                            <i class="fas fa-paper-plane"></i> Share Food with Community
+                        </button>
+                    </div>
+                </form>
+                
+                <div class="form-sidebar">
+                    <div class="sidebar-card">
+                        <h4><i class="fas fa-lightbulb"></i> Tips for Donors</h4>
+                        <ul>
+                            <li>Provide clear pickup instructions</li>
+                            <li>Mention dietary restrictions if any</li>
+                            <li>Ensure food is properly packaged</li>
+                            <li>Be available for pickup coordination</li>
+                        </ul>
+                    </div>
+                    <div class="sidebar-card">
+                        <h4><i class="fas fa-shield-alt"></i> Safety First</h4>
+                        <ul>
+                            <li>Share food in public spaces</li>
+                            <li>Maintain food safety standards</li>
+                            <li>Coordinate with verified NGOs</li>
+                            <li>Follow local health guidelines</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Food Listings Section -->
+    <section id="listings" class="section">
+        <div class="container">
+            <div class="section-header">
+                <div class="header-content">
+                    <h2>Available Food Nearby</h2>
+                    <p>Fresh meals waiting to be shared with those in need</p>
+                </div>
+                <div class="header-actions">
+                    <div class="search-filter">
+                        <div class="search-box">
+                            <i class="fas fa-search"></i>
+                            <input type="text" id="searchInput" placeholder="Search food items...">
+                        </div>
+                        <select id="locationFilter">
+                            <option value="">All Locations</option>
+                        </select>
+                        <select id="sortFilter" onchange="sortFoodListings()">
+                            <option value="newest">Newest First</option>
+                            <option value="expiring">Expiring Soon</option>
+                            <option value="quantity">Most Quantity</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="listings-container">
+                <div id="foodListings" class="food-grid">
+                    <!-- Food cards will be loaded here by JavaScript -->
+                </div>
+                
+                <div class="listings-sidebar">
+                    <div class="sidebar-card">
+                        <h4><i class="fas fa-info-circle"></i> Quick Actions</h4>
+                        <button class="btn btn-outline btn-full" onclick="showSection('post-food')">
+                            <i class="fas fa-plus"></i> Add Food Listing
+                        </button>
+                        <button class="btn btn-outline btn-full" onclick="loadFoodPostsFromFirebase()">
+                            <i class="fas fa-sync"></i> Refresh Listings
+                        </button>
+                    </div>
+                    
+                    <div class="sidebar-card">
+                        <h4><i class="fas fa-chart-line"></i> Statistics</h4>
+                        <div class="stats-mini">
+                            <div class="stat-mini">
+                                <span class="stat-mini-number" id="activeListings">0</span>
+                                <span class="stat-mini-label">Active Listings</span>
+                            </div>
+                            <div class="stat-mini">
+                                <span class="stat-mini-number" id="expiringSoon">0</span>
+                                <span class="stat-mini-label">Expiring Soon</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NGOs Section -->
+    <section id="ngos" class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Our Trusted NGO Partners</h2>
+                <p>Verified organizations making a difference in food redistribution</p>
+            </div>
+            
+            <div class="ngos-container">
+                <div class="ngo-grid" id="ngoListings">
+                    <!-- NGO cards will be loaded here by JavaScript -->
+                </div>
+                
+                <div class="ngo-actions">
+                    <div class="action-card">
+                        <h3>Want to Partner With Us?</h3>
+                        <p>Join our network of verified NGOs and help redistribute food to those in need.</p>
+                        <button class="btn btn-primary" onclick="openNGOForm()">
+                            <i class="fas fa-handshake"></i> Register Your NGO
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <i class="fas fa-utensils"></i>
+                        <span>FoodConnect</span>
+                    </div>
+                    <p>Connecting surplus food with hunger. Supporting UN Sustainable Development Goal 2: Zero Hunger.</p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/moin.raza.94009841" class="social-link"><i class="fab fa-facebook"></i></a>
+                        <a href="https://x.com/moinmaniyarr?s=21" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="https://in.linkedin.com/in/moin-maniyar-358399320" class="social-link"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://www.instagram.com/maniyarrr_moin/?igsh=eWVwbDJhNGhxaHg5&utm_source=qr#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <a href="#home" onclick="showSection('home')">Home</a>
+                    <a href="#post-food" onclick="showSection('post-food')">Donate Food</a>
+                    <a href="#listings" onclick="showSection('listings')">Find Food</a>
+                    <a href="#ngos" onclick="showSection('ngos')">NGO Partners</a>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <a href="https://www.fda.gov/food" target="_blank">Food Safety Guidelines</a>
+                    <a href="https://www.feedingamerica.org/our-work/food-bank-network" target="_blank">Partner NGOs</a>
+                    <a href="https://www.volunteermatch.org/search?k=hunger+relief" target="_blank">Volunteer Opportunities</a>
+                    <a href="https://www.wfp.org/stories" target="_blank">Success Stories</a>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Contact & Legal</h4>
+                    <a href="mailto:contact@foodconnect.org">dhairyashilmore2003@gmail.com</a>
+                    <a href="tel:+1555123FOOD">9823563994</a>
+                    <a href="https://www.google.com/maps" target="_blank">Global Network</a>
+                    <a href="https://www.termsfeed.com/blog/sample-privacy-policy-template/" target="_blank">Privacy Policy</a>
+                    <a href="https://www.termsfeed.com/blog/sample-terms-of-service-template/" target="_blank">Terms of Service</a>
+                    <a href="https://www.termsfeed.com/blog/sample-cookies-policy-template/" target="_blank">Cookie Policy</a>
+                </div>
+            </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p><i class="fas fa-envelope"></i> dhairyashilmore2003@gmail.com</p>
+                    <p><i class="fas fa-phone"></i> 9823563994</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Global Network</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 FoodConnect. Making a difference, one meal at a time.</p>
+                <div class="footer-links">
+                <div class="footer-links">
+                    <a href="https://www.termsfeed.com/blog/sample-privacy-policy-template/" target="_blank">Privacy Policy</a>
+                    <a href="https://www.termsfeed.com/blog/sample-terms-of-service-template/" target="_blank">Terms of Service</a>
+                    <a href="https://www.termsfeed.com/blog/sample-cookies-policy-template/" target="_blank">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Loading Spinner -->
+    <div id="loadingSpinner" class="loading-spinner">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore-compat.js"></script>
+    
+    <!-- Our Scripts -->
+    <script src="firebase.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
