@@ -34,9 +34,9 @@ The website allows donors to share excess food by providing details such as the 
 ---
 
 ## 🛠️ Technologies Used
-- Frontend: HTML, CSS, JavaScript *(or update as per your project)*
-- Backend: *(Node.js / Java / Python – update if applicable)*
-- Database: *(MySQL / MongoDB – update if applicable)*
+- Frontend: HTML, CSS, JavaScript *
+- Backend: *(Node.js / JavaScript)*
+- Database: *(Firebase)*
 
 ---
 
@@ -49,7 +49,7 @@ The website allows donors to share excess food by providing details such as the 
 ---
 
 ## 🚀 Future Enhancements
-- User authentication (Donor / Volunteer / Admin)
+- User authentication (Donor)
 - Real-time donation tracking
 - Google Maps integration for pickup locations
 - Mobile application support
